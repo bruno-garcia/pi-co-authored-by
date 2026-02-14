@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { isGitCommit, appendTrailers } from "./commit.js";
+import { isGitCommit, appendTrailers } from "./commit.ts";
 
 describe("isGitCommit", () => {
 	it("detects git commit -m", () => {

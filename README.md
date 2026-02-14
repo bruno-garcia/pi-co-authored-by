@@ -1,15 +1,20 @@
-# pi-extensions
+# pi-co-authored-by
 
-Personal extensions for the [Pi coding agent](https://github.com/badlogic/pi-mono).
+A [Pi](https://github.com/badlogic/pi) extension that automatically appends git trailers to commit messages when the agent runs `git commit`. Adds the model name and pi version so you always know which AI helped write the code.
 
-## Extensions
+## Features
 
-| Extension | Description |
-|-----------|-------------|
-| [co-authored-by](extensions/co-authored-by/) | Automatically appends git trailers (`Co-Authored-By`, `Generated-By`) to commit messages with the model name and pi version |
+**Co-Authored-By trailer** — Credits the model that helped write the code:
+```
+Co-Authored-By: Claude Sonnet 4 <noreply@pi.dev>
+```
 
-Example commit message:
+**Generated-By trailer** — Records which version of Pi was used:
+```
+Generated-By: pi 0.52.12
+```
 
+**Example commit:**
 ```
 fix: resolve null pointer
 
@@ -17,42 +22,36 @@ Co-Authored-By: Claude Sonnet 4 <noreply@pi.dev>
 Generated-By: pi 0.52.12
 ```
 
+## Requirements
+
+- [Pi](https://github.com/badlogic/pi) coding agent
+
 ## Install
 
 ```bash
-pi install git:github.com/bruno-garcia/pi-extensions
+pi install npm:pi-co-authored-by
 ```
 
-To enable only specific extensions:
-
-```json
-{
-  "packages": [
-    {
-      "source": "git:github.com/bruno-garcia/pi-extensions",
-      "extensions": ["extensions/co-authored-by/index.ts"]
-    }
-  ]
-}
-```
-
-## Quick Setup
-
-If you keep a local clone, add to your `~/.pi/agent/settings.json`:
-
-```json
-{
-  "extensions": [
-    "~/git/pi-extensions/extensions/co-authored-by"
-  ]
-}
-```
-
-Or use the CLI flag:
+Or try it without installing:
 
 ```bash
-pi -e ~/git/pi-extensions/extensions/co-authored-by
+pi -e npm:pi-co-authored-by
 ```
+
+You can also install from git:
+
+```bash
+pi install git:github.com/bruno-garcia/pi-co-authored-by
+```
+
+## How it works
+
+The extension hooks into Pi's `tool_call` event. When it detects a `git commit -m` command, it appends two extra `-m` flags to create [git trailers](https://git-scm.com/docs/git-interpret-trailers) with the current model name and pi version.
+
+| What | Value |
+|------|-------|
+| `Co-Authored-By` | Model name (e.g., `Claude Sonnet 4`) |
+| `Generated-By` | Pi version (e.g., `pi 0.52.12`) |
 
 ## Development
 
@@ -60,3 +59,7 @@ pi -e ~/git/pi-extensions/extensions/co-authored-by
 npm install
 npm test
 ```
+
+## License
+
+MIT
