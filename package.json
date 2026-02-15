@@ -1,6 +1,6 @@
 {
   "name": "pi-co-authored-by",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A Pi extension that automatically appends Co-Authored-By and Generated-By git trailers to commit messages with the model name and pi version",
   "author": "Bruno Garcia",
   "license": "MIT",
@@ -12,7 +12,7 @@
   "keywords": ["pi-package", "git", "co-authored-by", "pi-extension"],
   "files": [
     "extensions/co-authored-by.ts",
-    "extensions/commit.ts",
+    "lib/commit.ts",
     "README.md",
     "LICENSE"
   ],

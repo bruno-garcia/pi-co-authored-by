@@ -15,7 +15,7 @@
 
 import type { ExtensionAPI } from "@mariozechner/pi-coding-agent";
 import { isToolCallEventType, VERSION } from "@mariozechner/pi-coding-agent";
-import { isGitCommit, appendTrailers } from "./commit.ts";
+import { isGitCommit, appendTrailers } from "../lib/commit.ts";
 
 export default function (pi: ExtensionAPI) {
 	pi.on("tool_call", async (event, ctx) => {
